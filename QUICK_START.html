@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل البدء السريع - My Order</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .step {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 5px solid #667eea;
+        }
+        
+        .step h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .step p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .success {
+            background: #27ae60;
+        }
+        
+        .warning {
+            background: #f39c12;
+        }
+        
+        .info {
+            background: #3498db;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin: 20px 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 5px solid #17a2b8;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍔 My Order</h1>
+            <p>دليل البدء السريع</p>
+        </div>
+        
+        <div class="content">
+            <!-- الخطوة 1 -->
+            <div class="step">
+                <h2>1️⃣ التحضير والمتطلبات</h2>
+                <p>قبل البدء، تأكد من توفر:</p>
+                <ul class="checklist">
+                    <li>XAMPP أو خادم ويب محلي</li>
+                    <li>Apache و MySQL مفعلة</li>
+                    <li>PHP 7.4 أو أعلى</li>
+                    <li>متصفح ويب حديث</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>ℹ️ معلومة:</strong> إذا كنت تستخدم Windows، حمّل XAMPP من 
+                    <a href="https://www.apachefriends.org/" target="_blank">apachefriends.org</a>
+                </div>
+            </div>
+            
+            <!-- الخطوة 2 -->
+            <div class="step">
+                <h2>2️⃣ نقل الملفات</h2>
+                <p>انسخ مجلد "My Order pro" إلى:</p>
+                <div class="code-block">
+C:\xampp\htdocs\My Order pro\
+                </div>
+                <p style="margin-top: 10px;">أو على Mac/Linux:</p>
+                <div class="code-block">
+/Applications/XAMPP/htdocs/My Order pro/
+                </div>
+            </div>
+            
+            <!-- الخطوة 3 -->
+            <div class="step">
+                <h2>3️⃣ بدء الخوادم</h2>
+                <p>افتح XAMPP Control Panel واضغط Start بجانب:</p>
+                <ul class="checklist">
+                    <li>Apache</li>
+                    <li>MySQL</li>
+                </ul>
+                <div class="alert alert-success">
+                    <strong>✅ نجح:</strong> يجب أن تصبح كلاهما أخضر اللون
+                </div>
+            </div>
+            
+            <!-- الخطوة 4 -->
+            <div class="step">
+                <h2>4️⃣ إنشاء قاعدة البيانات</h2>
+                <p>افتح phpMyAdmin في متصفحك:</p>
+                <div class="code-block">
+http://localhost/phpmyadmin
+                </div>
+                <p style="margin-top: 15px;">ثم:</p>
+                <ol style="margin: 15px 0; padding-right: 20px;">
+                    <li>اضغط على "استيراد" (Import)</li>
+                    <li>اختر ملف <code>schema.sql</code></li>
+                    <li>اضغط "تنفيذ"</li>
+                </ol>
+                <div class="alert alert-success">
+                    <strong>✅ نجح:</strong> تم إنشاء قاعدة البيانات بنجاح
+                </div>
+            </div>
+            
+            <!-- الخطوة 5 -->
+            <div class="step">
+                <h2>5️⃣ زيارة الموقع</h2>
+                <p>افتح متصفحك وانتقل إلى:</p>
+                <div class="code-block">
+http://localhost/My%20Order%20pro/
+                </div>
+                <div class="alert alert-success">
+                    <strong>✅ مبروك!</strong> الموقع جاهز للاستخدام
+                </div>
+            </div>
+            
+            <!-- بيانات الدخول -->
+            <div class="step">
+                <h2>🔐 بيانات دخول الإدارة</h2>
+                <p>للدخول إلى لوحة التحكم، استخدم:</p>
+                <ul class="checklist">
+                    <li><strong>البريد:</strong> admin@myorder.com</li>
+                    <li><strong>كلمة المرور:</strong> admin123</li>
+                </ul>
+                <p style="margin-top: 20px; color: #f39c12;">
+                    ⚠️ <strong>تحذير:</strong> غيّر كلمة المرور بعد الدخول الأول في الإنتاج
+                </p>
+            </div>
+            
+            <!-- الخطوات التالية -->
+            <div class="step">
+                <h2>📚 الخطوات التالية</h2>
+                <ul class="checklist">
+                    <li>جرّب تسجيل حساب جديد</li>
+                    <li>أضف بعض المنتجات من لوحة الإدارة</li>
+                    <li>جرّب إضافة منتج للسلة</li>
+                    <li>جرّب إنشاء طلب</li>
+                    <li>اقرأ الملفات التوثيقية</li>
+                </ul>
+                <div class="button-group">
+                    <a href="README.md" class="button info">📖 اقرأ README</a>
+                    <a href="INSTALLATION.md" class="button info">🔧 دليل التثبيت</a>
+                    <a href="TECHNICAL_NOTES.md" class="button info">⚙️ ملاحظات تقنية</a>
+                </div>
+            </div>
+            
+            <!-- استكشاف الأخطاء -->
+            <div class="step">
+                <h2>🐛 في حالة وجود مشاكل</h2>
+                <h3 style="margin-top: 15px; color: #555;">خطأ: "خطأ في الاتصال بقاعدة البيانات"</h3>
+                <ul style="padding-right: 20px;">
+                    <li>تأكد من تشغيل MySQL في XAMPP</li>
+                    <li>تأكد من استيراد ملف schema.sql بنجاح</li>
+                    <li>تحقق من اسم قاعدة البيانات: my_order_db</li>
+                </ul>
+                
+                <h3 style="margin-top: 15px; color: #555;">خطأ: "404 Not Found"</h3>
+                <ul style="padding-right: 20px;">
+                    <li>تأكد من وضع الملفات في htdocs</li>
+                    <li>استخدم الرابط الصحيح: http://localhost/My%20Order%20pro/</li>
+                    <li>تحقق من اسم المجلد (حساس لحالة الأحرف على Linux)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📧 للمساعدة والدعم: <a href="mailto:admin@myorder.com">admin@myorder.com</a></p>
+            <p>📱 واتساب: <a href="https://wa.me/201021279663" target="_blank">+201021279663</a></p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                جميع الحقوق محفوظة © 2026 My Order | آخر تحديث: 31-01-2026
+            </p>
+        </div>
+    </div>
+</body>
+</html>

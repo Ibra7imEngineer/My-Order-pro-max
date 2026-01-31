@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Order | منصة طلب الطعام الاحترافية</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo" onclick="showPage('home')">
+                <i class="fa-solid fa-utensils"></i>
+                <span>My Order</span>
+            </div>
+            <ul class="nav-links">
+                <li onclick="showPage('home')">الرئيسية</li>
+                <li onclick="showPage('menu')">المنيو</li>
+                <li onclick="showPage('about')">عن الموقع</li>
+                <li onclick="showPage('contact')">تواصل معنا</li>
+            </ul>
+            <div class="nav-icons">
+                <div class="cart-icon" onclick="showPage('cart')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </div>
+                <!-- Google sign-in button removed per user request -->
+                <div class="user-icon" onclick="showPage('login')">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+                <div class="admin-toggle" onclick="showPage('admin')">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="home-page" class="page active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>اطلب وجبتك بلمسة واحدة من <span>My Order</span></h1>
+                    <p>أفضل المطاعم بين يديك، توصيل سريع، وجودة تليق بك.</p>
+                    <button class="main-btn" onclick="showPage('menu')">ابدأ تصفح المنيو الآن <i class="fa-solid fa-arrow-left"></i></button>
+                </div>
+                <div class="hero-graphic">
+                    <img src="https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg" alt="Hero Food">
+                </div>
+            </div>
+
+            <div style="margin-top:80px;">
+                <h2 class="section-title">�️ أفضل المنتجات</h2>
+                <div class="search-wrapper" style="margin-bottom:30px;">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="homeSearch" placeholder="ابحث عن منتجك المفضل..." onkeyup="searchHomeMenu()">
+                </div>
+                <div class="filter-tabs" style="margin-bottom:30px;">
+                    <button class="tab-btn active" onclick="filterHomeMenu('all')">الكل</button>
+                    <button class="tab-btn" onclick="filterHomeMenu('food')">🍔 أطعمة</button>
+                    <button class="tab-btn" onclick="filterHomeMenu('drinks')">🥤 مشروبات</button>
+                    <button class="tab-btn" onclick="filterHomeMenu('sweets')">🍰 حلويات</button>
+                </div>
+                <div id="homeMenuGrid" class="container items-grid"></div>
+                <div style="text-align:center; margin-top:40px;">
+                    <button class="main-btn" onclick="showPage('menu-page')" style="max-width:400px; margin:0 auto; padding:16px 40px;">
+                        عرض كل المنتجات <i class="fa fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div> 
+
+            <div style="margin-top:80px;">
+                <h2 class="section-title">�🏪 فروعنا والعناوين</h2>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:25px; margin-top:40px;">
+                    <div class="branch-card">
+                        <h3>🍕 مطعم البيتزا الإيطالي</h3>
+                        <p><i class="fa fa-map-marker"></i> <strong>العنوان:</strong> شارع النيل، القاهرة</p>
+                        <p><i class="fa fa-phone"></i> <strong>الهاتف:</strong> 01001234567</p>
+                        <p><i class="fa fa-clock"></i> <strong>الساعات:</strong> 12:00 - 02:00</p>
+                    </div>
+
+                    <div class="branch-card">
+                        <h3>🍔 برجر بازوكا</h3>
+                        <p><i class="fa fa-map-marker"></i> <strong>العنوان:</strong> ميدان التحرير، وسط البلد</p>
+                        <p><i class="fa fa-phone"></i> <strong>الهاتف:</strong> 01012345678</p>
+                        <p><i class="fa fa-clock"></i> <strong>الساعات:</strong> 11:00 - 03:00</p>
+                    </div>
+
+                    <div class="branch-card">
+                        <h3>🍱 مطعم السوشي الياباني</h3>
+                        <p><i class="fa fa-map-marker"></i> <strong>العنوان:</strong> الشارقة مول، التجمع الخامس</p>
+                        <p><i class="fa fa-phone"></i> <strong>الهاتف:</strong> 01023456789</p>
+                        <p><i class="fa fa-clock"></i> <strong>الساعات:</strong> 14:00 - 00:00</p>
+                    </div>
+
+                    <div class="branch-card">
+                        <h3>🍗 دجاج ستريت</h3>
+                        <p><i class="fa fa-map-marker"></i> <strong>العنوان:</strong> شارع قصر النيل</p>
+                        <p><i class="fa fa-phone"></i> <strong>الهاتف:</strong> 01034567890</p>
+                        <p><i class="fa fa-clock"></i> <strong>الساعات:</strong> 12:00 - 02:00</p>
+                    </div>
+
+                   
+
+                    <div class="branch-card">
+                        <h3>☕ كافيه الفن الحديث</h3>
+                        <p><i class="fa fa-map-marker"></i> <strong>العنوان:</strong> شارع الهرم، الجيزة</p>
+                        <p><i class="fa fa-phone"></i> <strong>الهاتف:</strong> 01056789012</p>
+                        <p><i class="fa fa-clock"></i> <strong>الساعات:</strong> 08:00 - 23:00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu-page" class="page">
+            <div class="container">
+                <h2 class="section-title">قائمة الطعام والمشروبات 🍔</h2>
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="mainSearch" placeholder="عن ماذا تبحث اليوم؟" onkeyup="searchFunction()">
+                </div>
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterItems('all')">الكل</button>
+                    <button class="tab-btn" onclick="filterItems('food')">أطعمة</button>
+                    <button class="tab-btn" onclick="filterItems('drinks')">مشروبات</button>
+                    <button class="tab-btn" onclick="filterItems('sweets')">حلويات</button>
+                </div>
+                <div id="itemsGrid" class="items-grid"></div>
+            </div>
+        </section>
+
+        <section id="about-page" class="page">
+            <div class="container">
+                <h2 class="section-title">لماذا تختار My Order؟</h2>
+                <div class="features-wrapper">
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fa-solid fa-bolt"></i></div>
+                        <h3>توصيل سريع</h3>
+                        <p>نصل إليك في أقل من 30 دقيقة بفضل أسطولنا المنتشر في كل مكان.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fa-solid fa-shield-heart"></i></div>
+                        <h3>جودة مضمونة</h3>
+                        <p>نطبق أعلى معايير السلامة والجودة في اختيار مطاعمنا وتغليف طلباتنا.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="icon-circle"><i class="fa-solid fa-headset"></i></div>
+                        <h3>دعم متواصل</h3>
+                        <p>فريقنا متاح لخدمتك على مدار الساعة للإجابة على كافة استفساراتك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-page" class="page">
+            <div class="container">
+                <h2 class="section-title">📞 يسعدنا تواصلك معنا</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-info-card">
+                        <div style="text-align:center; margin-bottom:30px;">
+                            <i class="fa-solid fa-headset" style="font-size:64px; color:var(--primary); margin-bottom:15px;"></i>
+                            <h3 style="font-size:28px; margin:0; color:#2C3E50;">معلومات التواصل</h3>
+                        </div>
+                        
+                        <div style="background:linear-gradient(135deg, rgba(255,107,53,0.05), rgba(255,142,95,0.05)); padding:20px; border-radius:14px; margin-bottom:20px; border-right:4px solid var(--primary);">
+                            <p style="margin:15px 0; font-size:16px; display:flex; align-items:center; gap:12px; color:#2C3E50;">
+                                <i class="fa fa-phone" style="font-size:20px; color:var(--primary);"></i> 
+                                <span><strong>الهاتف:</strong> <span id="contactPhone">01021279663</span></span>
+                            </p>
+                            <p style="margin:15px 0; font-size:16px; display:flex; align-items:center; gap:12px; color:#2C3E50;">
+                                <i class="fa fa-envelope" style="font-size:20px; color:var(--primary);"></i> 
+                                <span><strong>البريد:</strong> contact@myorder.com</span>
+                            </p>
+                            <p style="margin:15px 0; font-size:16px; display:flex; align-items:center; gap:12px; color:#2C3E50;">
+                                <i class="fa fa-location-dot" style="font-size:20px; color:var(--primary);"></i> 
+                                <span><strong>العنوان:</strong> القاهرة، جمهورية مصر العربية</span>
+                            </p>
+                            <p style="margin:15px 0; font-size:16px; display:flex; align-items:center; gap:12px; color:#2C3E50;">
+                                <i class="fa fa-clock" style="font-size:20px; color:var(--primary);"></i> 
+                                <span><strong>ساعات العمل:</strong> من 10 صباحاً إلى 11 ليلاً يومياً</span>
+                            </p>
+                        </div>
+
+                        <h4 style="margin:25px 0 15px 0; font-size:18px; color:#2C3E50;">تابعنا على وسائل التواصل:</h4>
+                        <div style="display:flex; gap:15px; justify-content:flex-end;">
+                            <a href="https://facebook.com" target="_blank" style="display:flex; align-items:center; justify-content:center; width:50px; height:50px; background:linear-gradient(135deg, #1877f2, #0A66C2); border-radius:50%; color:white; font-size:24px; transition:0.3s;" class="social-link">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="https://wa.me/201021279663" target="_blank" style="display:flex; align-items:center; justify-content:center; width:50px; height:50px; background:linear-gradient(135deg, #25d366, #1BA851); border-radius:50%; color:white; font-size:24px; transition:0.3s;" class="social-link">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" style="display:flex; align-items:center; justify-content:center; width:50px; height:50px; background:linear-gradient(135deg, #e1306c, #C13584); border-radius:50%; color:white; font-size:24px; transition:0.3s;" class="social-link">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="review-box-card">
+                        <div style="text-align:center; margin-bottom:20px;">
+                            <i class="fa-solid fa-star" style="font-size:48px; color:var(--primary); margin-bottom:10px;"></i>
+                            <h3 style="font-size:24px; margin:0; color:#2C3E50;">شاركنا رأيك وتقييمك</h3>
+                            <p style="color:#7F8C8D; margin:5px 0 0 0; font-size:14px;">نقدّر آرائك وملاحظاتك لتحسين الخدمة</p>
+                        </div>
+                        <textarea id="reviewText" placeholder="اكتب تجربتك وآرائك عن My Order هنا... نحن نستمع بكل اهتمام 💬" style="height:160px; padding:16px; border:2px solid #E0E0E0; border-radius:12px; font-size:15px; font-family:inherit; resize:none; transition:0.3s;"></textarea>
+                        <button onclick="sendReview()" class="main-btn" style="margin-top:12px;">⭐ إرسال التقييم</button>
+                    </div>
+                </div>
+
+                <div style="margin-top:50px;">
+                    <h3 style="text-align:center; font-size:24px; margin-bottom:30px; color:#2C3E50;">
+                        <i class="fa fa-comments" style="color:var(--primary);"></i> التقييمات والآراء
+                    </h3>
+                    <div id="reviewsList" class="reviews-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="login-page" class="page">
+            <div class="login-container">
+                <div class="login-box">
+                    <h1 style="text-align:center; background: linear-gradient(135deg, #FF6B35, #FF8E5F); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom:10px; font-size:32px; font-weight:900;">🔐 My Order</h1>
+                    <p style="text-align:center; color:#7F8C8D; margin-bottom:30px; font-size:14px;">لوحة التحكم والإدارة</p>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="admin-username">👤 اسم المستخدم</label>
+                            <input type="text" id="admin-username" placeholder="أدخل اسم المستخدم" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-password">🔑 كلمة المرور</label>
+                            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور" required>
+                        </div>
+                        
+                        <div id="loginError" style="color:#E74C3C; text-align:center; margin-bottom:20px; display:none; font-weight:600; background:#FADBD8; padding:12px; border-radius:8px; font-size:14px;"></div>
+                        
+                        <button type="button" class="login-btn" onclick="validateAdminLogin()">✅ تسجيل الدخول</button>
+                    </form>
+                    
+                    <div style="background:linear-gradient(135deg, rgba(255,107,53,0.05), rgba(255,142,95,0.05)); padding:20px; border-radius:12px; margin-top:25px; border:1px solid rgba(255,107,53,0.2);">
+                        <p style="font-size:13px; color:#2C3E50; text-align:center; margin-bottom:12px;"><strong>📋 بيانات الدخول:</strong></p>
+                        <div style="background:white; padding:12px; border-radius:8px; margin-bottom:8px;">
+                            <p style="font-size:13px; color:#555; text-align:center; margin:3px 0;"><strong>المستخدم:</strong> <code style="background:#F0F0F0; padding:2px 6px; border-radius:4px;">admin</code></p>
+                        </div>
+                        <div style="background:white; padding:12px; border-radius:8px;">
+                            <p style="font-size:13px; color:#555; text-align:center; margin:3px 0;"><strong>المرور:</strong> <code style="background:#F0F0F0; padding:2px 6px; border-radius:4px;">12345</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart-page" class="page">
+            <div class="container">
+                <h2 class="section-title">🛒 سلة المشتريات</h2>
+                
+                <!-- خطوات العملية -->
+                <div style="display:flex; justify-content:space-around; margin-bottom:50px; flex-wrap:wrap; gap:20px; max-width:900px; margin-left:auto; margin-right:auto;">
+                    <div style="text-align:center; flex:1; min-width:150px;">
+                        <div style="width:50px; height:50px; background:linear-gradient(135deg, #FF6B35, #FF8E5F); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:white; font-weight:bold; font-size:20px;">1</div>
+                        <p style="font-weight:600; color:#2C3E50;">تحديد المنتجات</p>
+                    </div>
+                    <div style="flex:0.5; display:flex; align-items:center; color:#BDC3C7;"><i class="fa fa-arrow-left" style="font-size:24px;"></i></div>
+                    <div style="text-align:center; flex:1; min-width:150px;">
+                        <div style="width:50px; height:50px; background:linear-gradient(135deg, #FF6B35, #FF8E5F); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:white; font-weight:bold; font-size:20px;">2</div>
+                        <p style="font-weight:600; color:#2C3E50;">ملء البيانات</p>
+                    </div>
+                    <div style="flex:0.5; display:flex; align-items:center; color:#BDC3C7;"><i class="fa fa-arrow-left" style="font-size:24px;"></i></div>
+                    <div style="text-align:center; flex:1; min-width:150px;">
+                        <div style="width:50px; height:50px; background:linear-gradient(135deg, #FF6B35, #FF8E5F); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:white; font-weight:bold; font-size:20px;">3</div>
+                        <p style="font-weight:600; color:#2C3E50;">تأكيد الطلب</p>
+                    </div>
+                </div>
+
+                <!-- قائمة المنتجات -->
+                <div style="background:white; border-radius:16px; padding:30px; box-shadow:0 8px 24px rgba(0,0,0,0.12); margin-bottom:30px;">
+                    <h3 style="margin-bottom:25px; color:#2C3E50; font-size:20px; font-weight:700; display:flex; align-items:center; gap:10px;">
+                        <i class="fa fa-list"></i> قائمة الطلبات
+                    </h3>
+                    <div id="cartItemsList" class="cart-items"></div>
+                </div>
+
+                <!-- نموذج البيانات والدفع -->
+                <div class="cart-checkout" style="display:grid; grid-template-columns:1fr 350px; gap:30px; margin-top:30px;">
+                    <!-- نموذج البيانات -->
+                    <div class="billing-info" style="background:white; padding:30px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
+                        <h3 style="display:flex; align-items:center; gap:10px; margin-bottom:25px; color:#FF6B35; font-size:20px; font-weight:700;">
+                            <i class="fa fa-user-circle"></i> بيانات التوصيل
+                        </h3>
+                        
+                        <div style="margin-bottom:20px;">
+                            <label style="display:block; margin-bottom:8px; font-weight:600; color:#2C3E50;">👤 الاسم الكامل</label>
+                            <input type="text" id="userName" placeholder="أدخل اسمك بالكامل" style="width:100% !important;">
+                        </div>
+
+                        <div style="margin-bottom:20px;">
+                            <label style="display:block; margin-bottom:8px; font-weight:600; color:#2C3E50;">📍 عنوان التوصيل</label>
+                            <input type="text" id="userAddress" placeholder="شارع... حي... المدينة..." style="width:100% !important;">
+                        </div>
+
+                        <div style="margin-bottom:20px;">
+                            <label style="display:block; margin-bottom:8px; font-weight:600; color:#2C3E50;">📱 رقم الهاتف</label>
+                            <input type="tel" id="userPhone" placeholder="01xxxxxxxxx" style="width:100% !important;">
+                        </div>
+
+                        <div style="background:linear-gradient(135deg, rgba(255,107,53,0.05), rgba(255,142,95,0.05)); padding:15px; border-radius:12px; border-right:3px solid #FF6B35; margin-top:25px;">
+                            <p style="font-size:13px; color:#7F8C8D; margin:0;"><i class="fa fa-info-circle"></i> <strong>ملاحظة:</strong> تأكد من صحة البيانات قبل التأكيد</p>
+                        </div>
+                    </div>
+
+                    <!-- ملخص الطلب والدفع -->
+                    <div style="position:sticky; top:100px;">
+                        <div style="background:linear-gradient(135deg, #FF6B35, #FF8E5F); border-radius:16px; padding:30px; color:white; box-shadow:0 12px 32px rgba(255,107,53,0.3);">
+                            <h3 style="margin-bottom:25px; font-size:20px; font-weight:700; display:flex; align-items:center; gap:10px;">
+                                <i class="fa fa-receipt"></i> ملخص الطلب
+                            </h3>
+
+                            <div id="orderSummary" style="margin-bottom:20px; max-height:300px; overflow-y:auto; padding-bottom:15px; border-bottom:2px solid rgba(255,255,255,0.3);">
+                            </div>
+
+                            <div style="margin-bottom:15px; padding-bottom:15px; border-bottom:2px solid rgba(255,255,255,0.3);">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:15px;">
+                                    <span>المجموع الجزئي:</span>
+                                    <span id="subtotalPrice">0</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:15px;">
+                                    <span>رسوم التوصيل:</span>
+                                    <span id="shippingPrice">20 ج.م</span>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; font-size:18px; font-weight:bold;">
+                                <span>الإجمالي النهائي:</span>
+                                <span style="font-size:24px;"><span id="totalPrice">0</span> ج.م</span>
+                            </div>
+
+                            <button class="confirm-btn" onclick="finishOrder()" style="width:100%; padding:16px !important; font-size:16px !important; font-weight:700; display:flex; align-items:center; justify-content:center; gap:10px;">
+                                <i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> أكمل عبر واتساب
+                            </button>
+
+                            <p style="font-size:12px; color:rgba(255,255,255,0.8); margin-top:15px; text-align:center; margin-bottom:0;">
+                                <i class="fa fa-lock"></i> معاملتك آمنة وسرية
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-page" class="page">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; flex-wrap:wrap; gap:20px;">
+                <h2 class="section-title" style="margin:0; flex:1; text-align:left;">🛠️ لوحة التحكم</h2>
+                <button onclick="logoutAdmin()" style="background:linear-gradient(135deg, #E74C3C, #C0392B); color:white; padding:14px 28px; border:none; border-radius:12px; cursor:pointer; font-weight:bold; font-size:15px; transition:0.3s; box-shadow:0 4px 15px rgba(231,76,60,0.3);">🚪 تسجيل خروج</button>
+            </div>
+            <div class="admin-grid">
+                <div class="add-item-form">
+                    <h3>➕ إضافة صنف جديد</h3>
+                    <input type="text" id="newItemName" placeholder="اسم الوجبة">
+                    <input type="number" id="newItemPrice" placeholder="السعر (ج.م)">
+                    <select id="newItemCat" style="background:#F8F9FA !important;">
+                        <option value="food">🍔 أطعمة</option>
+                        <option value="drinks">🥤 مشروبات</option>
+                        <option value="sweets">🍰 حلويات</option>
+                    </select>
+                    <input type="text" id="newItemImg" placeholder="رابط الصورة (URL) أو اسم الملف داخل images/ مثل burger.jpg">
+                    <input type="file" id="newItemFile" accept="image/*" style="margin-top:8px;">
+                    <button onclick="addNewItemFromAdmin()" class="main-btn">✨ إضافة الآن</button>
+                    
+                    <hr style="border:none; border-top:2px solid #E0E0E0; margin:30px 0;">
+                    
+                    <h3 style="margin-top:0;">📱 إعدادات المطعم</h3>
+                    <label style="display:block; margin-bottom:8px; font-weight:600; color:#2C3E50;">رقم الواتساب الخاص بالمطعم:</label>
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" id="restaurantPhoneInput" placeholder="01xxxxxxxxx" style="flex:1 !important; margin-bottom:0 !important;">
+                        <button onclick="updateRestaurantPhone()" class="main-btn" style="flex:0.4; margin-bottom:0 !important; padding:12px !important;">💾 حفظ</button>
+                    </div>
+                    <p style="font-size:12px; color:#7F8C8D; margin-top:10px;">رقم الهاتف الحالي: <strong id="currentPhoneDisplay">201021279663</strong></p>
+                    <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+                        <button onclick="seedFromAdmin()" class="main-btn" style="background:linear-gradient(135deg, #6C5CE7, #8E7EF6); padding:10px 16px; width:auto;">🧪 تهيئة بيانات تجريبية</button>
+                        <button onclick="clearAllItems()" class="main-btn" style="background:linear-gradient(135deg, #E74C3C, #C0392B); padding:10px 16px; width:auto;">🧹 مسح كل الأصناف</button>
+                        <small style="color:#7F8C8D;">زر لتعبئة بيانات تجريبية في Firebase أو LocalStorage</small>
+                    </div>
+                </div>
+                <div class="current-items-manage">
+                    <h3>📝 إدارة الأصناف</h3>
+                    <div id="adminItemsList" style="max-height:600px; overflow-y:auto;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 لـ My Order</p>
+    </footer>
+
+    <script src="script-new.php"></script>
+</body>
+</html>

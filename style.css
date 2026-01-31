@@ -1,0 +1,802 @@
+/* --- 1. إعدادات الألوان والخطوط الأساسية --- */
+:root {
+    --primary: #FF6B35;
+    --primary-dark: #E85A1F;
+    --primary-light: #FF8E5F;
+    --dark: #1a1a1a;
+    --dark-light: #2d2d2d;
+    --light-bg: #F8F9FA;
+    --white: #ffffff;
+    --accent: #FFB347;
+    --success: #27AE60;
+    --danger: #E74C3C;
+    --shadow: 0 8px 24px rgba(255, 107, 53, 0.15);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --header-height: 88px; /* ارتفاع تقريبي للشريط العلوي لاستخدامه كمسافة احتياطية */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column; /* يرتب العناصر تحت بعض: نافبار ثم محتوى */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;         /* لضبط الاتجاه العربي */
+    overflow-x: hidden;
+}
+
+/* أضفنا مسافة داخلية أعلى الـ main لتفادي تداخل الشريط العلوي الـ sticky مع المحتوى */
+main {
+    margin-top: 0;
+    padding-top: var(--header-height);
+}
+
+
+/* --- 2. الهيدر وشريط التنقل (Navbar) --- */
+header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 0; /* نتحكم بمساحة المحتوى داخل .navbar لتضمن امتداد الخلفية بكامل العرض */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--primary);
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 5%; /* تحكم بمساحات المحتوى داخل الـ navbar */
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.06); /* خلفية شفافة خفيفة */
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links li {
+    color: #E0E0E0;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-links li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.3s ease;
+}
+
+.nav-links li:hover {
+    color: white;
+}
+
+.nav-links li:hover::after {
+    width: 100%;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 15px;
+    color: var(--white);
+    font-size: 20px;
+}
+
+.google-sign {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    border-radius:8px;
+    background: white;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+.google-sign:hover { transform: translateY(-4px); }
+
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* --- 3. تصميم الصفحات والحركات --- */
+.page {
+    display: none;
+    padding: 40px 8%;
+    animation: fadeIn 0.4s ease-in-out;
+    min-height: calc(100vh - 80px);
+    background: rgba(255, 255, 255, 0.95);
+    margin-top: 0;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: var(--shadow); }
+    50% { box-shadow: 0 12px 40px rgba(255, 107, 53, 0.25); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- 4. الصفحة الرئيسية (Hero Section) --- */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.04) 0%, rgba(255, 107, 53, 0.015) 100%);
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    font-weight: 900;
+    animation: slideInRight 0.8s ease;
+    color: #1a1a2e;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content {
+    flex: 1 1 520px;
+    text-align: right; /* محاذاة عربية صحيحة */
+}
+
+.hero-graphic {
+    flex: 0 0 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-graphic img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 16px;
+}
+
+.hero-content h1 span {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.hero-graphic img {
+    max-width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2);
+    transition: var(--transition);
+}
+
+.hero-graphic img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px rgba(255, 107, 53, 0.3);
+}
+
+/* --- 5. المنيو والبحث والكروت --- */
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 35px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 14px 18px 14px 50px; /* جعل أيقونة البحث على جهة البداية (اليسار في RTL) */
+    border-radius: 50px;
+    border: 2px solid #E0E0E0;
+    font-size: 16px;
+    transition: var(--transition);
+    background: white;
+}
+
+.search-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 18px; /* يظهر على جهة البداية في RTL */
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.res-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    animation: fadeIn 0.6s ease;
+}
+
+.res-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 107, 53, 0.3);
+    animation: pulse-glow 2s infinite;
+}
+
+.res-card:hover img {
+    transform: scale(1.08);
+}
+
+.res-card img {
+    width: 100%;
+    height: 140px; /* صغرنا ارتفاع الصورة في الكروت بالقائمة الرئيسية */
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.res-info {
+    padding: 15px;
+    text-align: center;
+}
+
+/* --- 6. الأزرار الأساسية (الحجم الطبيعي المثالي) --- */
+.main-btn, .confirm-btn, .add-btn-card, .auth-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    transition: var(--transition);
+    margin-top: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.main-btn::before, .confirm-btn::before, .add-btn-card::before, .auth-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s ease;
+}
+
+.main-btn:hover::before, .confirm-btn:hover::before, .add-btn-card:hover::before, .auth-btn:hover::before {
+    left: 100%;
+}
+
+.main-btn:hover, .add-btn-card:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+/* --- 7. السلة (Cart) وبيانات العميل --- */
+.billing-info {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+}
+
+.billing-info h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: var(--primary);
+}
+
+/* مربعات الإدخال (الحجم الطبيعي 50px) */
+input[type="text"], 
+input[type="tel"], 
+input[type="number"], 
+input[type="password"],
+textarea, 
+select {
+    width: 100% !important;
+    height: 50px !important;
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    margin-bottom: 16px !important;
+    border: 2px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    outline: none !important;
+    display: block !important;
+    background: white !important;
+    transition: var(--transition) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1) !important;
+}
+
+.total-box {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 142, 95, 0.1));
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 20px 0;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
+}
+
+.confirm-btn {
+    background: linear-gradient(135deg, var(--success), #2ECC71) !important;
+    font-size: 18px !important;
+}
+
+
+/* --- 8. الأدمن والتقييمات --- */
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* تثبيت لوحة الإضافة في لوحة الإدارة لتبقى ظاهرة عند التمرير */
+.admin-grid .add-item-form {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    align-self: start;
+}
+
+.add-item-form, .current-items-manage {
+    background: linear-gradient(135deg, white, #F8F9FA);
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    transition: var(--transition);
+}
+
+.add-item-form:hover, .current-items-manage:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- 9. قسم المميزات (About) --- */
+.features-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.feature-box {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    position: relative;
+}
+
+.feature-box:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 107, 53, 0.3);
+}
+
+/* --- Branch / Locations cards (refactor from inline styles) --- */
+.branch-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-left: 4px solid var(--primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.branch-card h3{
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.branch-card p{
+    color: #7F8C8D;
+    margin-bottom: 10px;
+}
+.branch-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(255,107,53,0.18);
+}
+
+.feature-box i {
+    font-size: 44px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* --- 10. الفوتر وتأثير الثلج --- */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+.snowflake {
+    color: white;
+    position: fixed;
+    top: -5%;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(105vh); }
+}
+
+/* --- 11. الموبايل (Responsive) --- */
+@media (max-width: 768px) {
+    .hero-section, .admin-grid {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .nav-links { display: none; }
+    .hero-content h1 { font-size: 28px; }
+    .page { padding: 20px 5%; }
+}
+/* --- حط الكود ده هنا بعد آخر قوس في الملف --- */
+
+.category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.category-filter button, .filter-tabs .tab-btn {
+    padding: 12px 28px;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-filter button::before, .filter-tabs .tab-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    z-index: -1;
+    transition: left 0.4s ease;
+}
+
+.category-filter button:hover, 
+.category-filter button.active,
+.filter-tabs .tab-btn:hover,
+.filter-tabs .tab-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+    transform: translateY(-2px);
+}
+/* لازم يكون فيه نقطة قبل كلمة container وقبل كلمة items-grid */
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.items-grid {
+    display: grid !important; /* ضيف !important عشان تضمن إنه يغطي أي تنسيق قديم */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%; /* خليه 100% لأنه جوه الـ container فعلياً */
+    margin: 0 auto;
+}
+
+/* --- تحسينات الاستجابة (Responsive) --- */
+@media (max-width: 900px) {
+    .hero-section {
+        flex-direction: column-reverse;
+        gap: 20px;
+        padding: 30px;
+    }
+    .hero-content h1 { font-size: 36px; }
+    .nav-links { flex-wrap: wrap; gap: 10px; }
+    .navbar { padding: 12px 4%; }
+    .container { padding: 12px; }
+}
+
+@media (max-width: 600px) {
+    .items-grid { grid-template-columns: 1fr !important; }
+    .res-card img { height: 160px; }
+    .search-wrapper { max-width: 100%; padding: 0 10px; }
+    .search-wrapper input { padding: 14px 18px 14px 50px; }
+    .nav-links { gap: 8px; font-size: 14px; }
+    .nav-icons { gap: 8px; }
+}
+
+.home-page .section-title { margin-top: 10px; }
+
+.home-page .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+/* زر تسجيل الدخول في لوحة الإدارة - تكبير وتحسين الظهور */
+.login-btn {
+    width: 100%;
+    padding: 18px 20px !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light)) !important;
+    color: white !important;
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.25) !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.login-btn:hover {
+    transform: translateY(-3px) !important;
+}
+
+/* تأثيرات حركة الموس على الكروت والعناصر */
+.res-card {
+    position: relative;
+    overflow: visible;
+}
+
+.res-card:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+.feature-box {
+    position: relative;
+    transition: var(--transition);
+}
+
+.feature-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(255, 107, 53, 0.2);
+}
+
+.branch-card {
+    position: relative;
+    transition: var(--transition);
+}
+
+.branch-card:hover {
+    transform: translateY(-10px) translateX(-5px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* تأثير التتبع: عناصر تتحرك مع الموس */
+.add-item-form, .current-items-manage {
+    position: relative;
+}
+
+.add-item-form:hover, .current-items-manage:hover {
+    transform: translateY(-4px);
+}
+
+/* تأثيرات إضافية للأيقونات والأزرار */
+.nav-icons i, .user-icon, .cart-icon, .admin-toggle {
+    transition: var(--transition);
+}
+
+.nav-icons i:hover, .user-icon:hover, .cart-icon:hover, .admin-toggle:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* صور تتحرك عند hover */
+.hero-graphic img {
+    transition: var(--transition);
+}
+
+.hero-section:hover .hero-graphic img {
+    transform: scale(1.05) translateY(-8px);
+}
+
+/* --- تحسينات صفحة التواصل --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.contact-info-card, .review-box-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+    transition: var(--transition);
+}
+
+.contact-info-card:hover, .review-box-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.social-link:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+#reviewText {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+#reviewText:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1) !important;
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.review-item {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-right: 4px solid var(--primary);
+    transition: var(--transition);
+}
+
+.review-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .reviews-container {
+        grid-template-columns: 1fr;
+    }
+}
